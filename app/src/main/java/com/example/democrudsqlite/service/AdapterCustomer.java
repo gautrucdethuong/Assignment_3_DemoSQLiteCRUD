@@ -76,15 +76,13 @@ public class AdapterCustomer extends BaseAdapter {
         txtCustomerName.setText(customer.getCustomerName());
         txtCustomerCode.setText("Code: " + customer.getCustomerCode());
 
-        //Load image from internet
-        try {
-            Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(customerArrayList.get(position).getCustomerUrl()).getContent());
-            imageUrlView.setImageBitmap(bitmap);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //Load image from internet via Picasso
+        Picasso.with(context)
+                .load(customerArrayList.get(position).getCustomerUrl()) // get url from list data customer
+                .resize(120, 120) // Resize to the width specified maintaining aspect ratio
+                .error(R.drawable.erroravt) // error RESOURCE LOADING
+                .into(imageUrlView);
+
 
         // Get id customer
         int id = customer.getCustomerId();

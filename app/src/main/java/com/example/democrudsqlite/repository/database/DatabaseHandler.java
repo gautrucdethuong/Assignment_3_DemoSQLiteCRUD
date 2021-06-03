@@ -97,4 +97,34 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return res;
     }
 
+
+    public int getNotesCount() {
+        //Log.i(TAG, "MyDatabaseHelper.getNotesCount ... " );
+
+        String countQuery = "SELECT  * FROM " + TABLE_CUSTOMER;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+
+        int count = cursor.getCount();
+
+        cursor.close();
+
+        // return count
+        return count;
+    }
+
+
+
+    public void createDefaultNotesIfNeed()  {
+        int count = this.getNotesCount();
+        if(count == 0 ) {
+            Customer note1 = new Customer("Huynh Van Huong",
+                    "CE140197","https://upload.wikimedia.org/wikipedia/en/thumb/e/e9/Avatar-TheCompleteBook2Collection.jpg/220px-Avatar-TheCompleteBook2Collection.jpg");
+            Customer note2 = new Customer("Anime",
+                    "CE140197", "https://upload.wikimedia.org/wikipedia/en/thumb/e/e9/Avatar-TheCompleteBook2Collection.jpg/220px-Avatar-TheCompleteBook2Collection.jpg");
+            this.AddCustomer(note1);
+            this.AddCustomer(note2);
+        }
+    }
+
 }

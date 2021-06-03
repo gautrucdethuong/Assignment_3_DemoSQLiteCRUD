@@ -58,6 +58,8 @@ public class CustomerActivity extends AppCompatActivity {
         database = new DatabaseHandler(this);
         customerArrayList = new ArrayList<>();
 
+        database.createDefaultNotesIfNeed();
+
         // Initialization pointer, pointing to the result of the query
         Cursor cursor = database.getAllListCustomer();
 
@@ -141,4 +143,5 @@ public class CustomerActivity extends AppCompatActivity {
         }
 
     }
+
 }
